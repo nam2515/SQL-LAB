@@ -1,0 +1,40 @@
+1.1 Data Query Language
+
+1) select e.ename,
+    s.design_code
+    from emp e, staff_master s
+    where
+    e.deptno(+)=s.dept_code
+    and sal between 12000 and 25000;
+
+o/p-
+
+2) select staff_code, staff_name, dept_code
+  FROM staff_master
+  where (MONTHS_BETWEEN(sysdate,hiredate)/12)>18;
+
+o/p- STAFF_CODE STAF  DEPT_CODE
+---------- ---- ----------
+    100005 John         10
+
+3) select * from staff_master
+   WHERE mgr_code is NULL;
+
+o/p- no rows selected
+
+
+4)select * from book_master
+   Where book_pub_year BETWEEN 2001 AND 2004
+   AND book_name like '%&%';
+
+o/p-  BOOK_CODE BOOK_NAME                                          BOOK_PUB_YEAR BOOK_PUB_AUTHOR
+---------- -------------------------------------------------- ------------- --------------------------------------------------
+  10000003 JAVA Complete Reference                                     2004 H.Schild
+  10000007 Intoduction To Algorithams                                  2001 Cormen
+  10000009 Introduction to O/S                                         2001 Millan
+
+
+5) select * from book_master
+   WHERE book_name like '%\_%' ESCAPE '\';
+
+
