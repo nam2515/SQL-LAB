@@ -1,0 +1,48 @@
+2.2
+
+1)SQL> select MAX(staff_sal) Maximum,
+ MIN(staff_sal) Minimum, 
+SUM(staff_sal) Total, 
+ROUND(AVG(staff_sal)) Average 
+from staff_master;
+
+   MAXIMUM    MINIMUM      TOTAL    AVERAGE
+---------- ---------- ---------- ----------
+     62000      17000     289000      28900
+
+2)SQL> 
+LEFTOUTER JOIN
+select s.dept_code, count(e.mgr)
+  2  from staff_master s, emp e
+  3  where s.dept_code(+)=e.deptno
+  4  group by(s.dept_code, e.deptno);
+
+ DEPT_CODE COUNT(E.MGR)
+---------- ------------
+        10            4
+        30           18
+        20           20
+
+RIGHTOUTER JOIN
+
+SQL> select s.dept_code, count(e.mgr)
+  2  from staff_master s, emp e
+  3  where s.dept_code=e.deptno(+)
+  4  group by(s.dept_code, e.deptno);
+
+ DEPT_CODE COUNT(E.MGR)
+---------- ------------
+        10            4
+        40            0
+        30           18
+        20           20
+
+
+3)SQL> select s.dept_code, sum(e.sal)
+  2  from staff_master s, emp e
+  3  where s.dept_code(+)=e.deptno AND e.mgr is null
+  4  group by(s.dept_code, e.deptno);
+
+ DEPT_CODE SUM(E.SAL)
+---------- ----------
+        10      10000

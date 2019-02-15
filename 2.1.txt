@@ -1,0 +1,185 @@
+2.1 Single Row Functions:
+
+1) SELECT staff_name , staff_sal,
+   LPAD(staff_sal,15,'$')
+   Salary FROM staff_master;
+
+STAF  STAFF_SAL SALARY
+---- ---------- ------------------------------------------------------------
+Arvi      17000 $$$$$$$$$$17000
+nd
+
+Shya      20000 $$$$$$$$$$20000
+m
+
+Moha      24000 $$$$$$$$$$24000
+n
+
+Anil      20000 $$$$$$$$$$20000
+John      32000 $$$$$$$$$$32000
+
+STAF  STAFF_SAL SALARY
+---- ---------- ------------------------------------------------------------
+Alle      42000 $$$$$$$$$$42000
+n
+
+Smit      62000 $$$$$$$$$$62000
+h
+
+Ravi      18000 $$$$$$$$$$18000
+raj
+
+Rahu      22000 $$$$$$$$$$22000
+l
+
+STAF  STAFF_SAL SALARY
+---- ---------- ------------------------------------------------------------
+
+Ram       32000 $$$$$$$$$$32000
+
+
+
+2) Select TO_CHAR(student_dob, 'MM-DD-YYYY')
+   from student_master
+    WHERE
+    TO_CHAR(student_dob, 'dy')='sat'OR TO_CHAR(student_dob,'dy')='sun';
+
+TO_CHAR(ST
+----------
+11-01-1981
+01-14-1979
+01-15-1983
+01-17-1982
+01-19-1980
+01-20-1980
+12-27-1980
+09-28-1980
+
+8 rows selected.
+
+
+
+
+3) select staff_name,Round(MONTHS_BETWEEN(sysdate,hiredate)) as Months_Worked from staff_master order by Months_Worked DESC;
+
+STAFF_NAME                                         MONTHS_WORKED
+-------------------------------------------------- -------------
+John                                                         217
+Anil                                                         215
+Allen                                                        214
+Ram                                                          205
+Mohan                                                        205
+Shyam                                                        204
+Smith                                                        203
+Arvind                                                       193
+Raviraj                                                      193
+Rahul                                                        182
+
+10 rows selected.
+
+4)SQL> select * from staff_master
+  2  WHERE
+  3  TO_CHAR(hiredate,'DD') BETWEEN 1 AND 15
+  4  AND TO_CHAR(hiredate, 'Month') LIKE '%December%';
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE
+---------- -------------------------------------------------- -----------
+ DEPT_CODE STAFF_DOB HIREDATE    MGR_CODE  STAFF_SAL
+---------- --------- --------- ---------- ----------
+STAFF_ADDRESS
+--------------------------------------------------------------------------------
+G
+-
+    100009 Rahul                                                      102
+        20 16-JAN-78 11-DEC-03     100006      22000
+Hyderabad
+C
+
+
+5)
+SQL> select staff_name, staff_sal, 
+CASE
+WHEN staff_sal >=50000 THEN grade='A'
+WHEN staff_sal>=25000 and staff_sal<50000 THEN grade='B'
+from staff_master;
+
+STAFF_NAME                                          STAFF_SAL G
+-------------------------------------------------- ---------- -
+Arvind                                                  17000 C
+Shyam                                                   20000 C
+Mohan                                                   24000 C
+Anil                                                    20000 C
+John                                                    32000 B
+Allen                                                   42000 B
+Smith                                                   62000 A
+Raviraj                                                 18000 C
+Rahul                                                   22000 C
+Ram                                                     32000 B
+
+
+
+6)select staff_name, hiredate, TO_CHAR(hiredate,'DY') as DAY
+  FROM staff_master order by day;
+
+STAFF_NAME                                         HIREDATE  DAY
+-------------------------------------------------- --------- ------------
+Allen                                              23-APR-01 MON
+Raviraj                                            11-JAN-03 SAT
+Mohan                                              19-JAN-02 SAT
+Anil                                               11-MAR-01 SUN
+Shyam                                              17-FEB-02 SUN
+John                                               21-JAN-01 SUN
+Rahul                                              11-DEC-03 THU
+Ram                                                17-JAN-02 THU
+Smith                                              12-MAR-02 TUE
+Arvind                                             15-JAN-03 WED
+
+10 rows selected.
+
+
+7)select instr('mississippi','i',1,3) from dual;
+
+INSTR('MISSISSIPPI','I',1,3)
+----------------------------
+                           8
+
+
+8) select TO_CHAR(NEXT_DAY(LAST_DAY(SYSDATE)-7,'Friday'), 'DdSpth "of" monthYYYY') as PayDate FROM DUAL;
+
+PAYDATE
+--------------------------------------------------------
+Twenty-Two of february 2019
+
+
+
+9)SQL> SELECT student_code, student_name,
+  2  DECODE(dept_code, 20,'Electricals', 30, 'Electronics', 'Others') Dept_name from student_master;
+
+STUDENT_CODE STUDENT_NAME                                       DEPT_NAME
+------------ -------------------------------------------------- -----------
+        1001 Amit                                               Others
+        1002 Ravi                                               Others
+        1003 Ajay                                               Electricals
+        1004 Raj                                                Electronics
+        1005 Arvind                                             Others
+        1006 Rahul                                              Others
+        1007 Mehul                                              Electricals
+        1008 Dev                                                Others
+        1009 Vijay                                              Electronics
+        1010 Rajat                                              Others
+        1011 Sunder                                             Others
+
+STUDENT_CODE STUDENT_NAME                                       DEPT_NAME
+------------ -------------------------------------------------- -----------
+        1012 Rajesh                                             Electronics
+        1013 Anil                                               Electricals
+        1014 Sunil                                              Others
+        1015 Kapil                                              Others
+        1016 Ashok                                              Others
+        1017 Ramesh                                             Electronics
+        1018 Amit Raj                                           Others
+        1019 Ravi Raj                                           Others
+        1020 Amrit                                              Others
+        1021 Sumit                                              Electricals
+
+21 rows selected.
